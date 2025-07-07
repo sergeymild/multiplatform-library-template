@@ -1,0 +1,7 @@
+source 'https://cdn.cocoapods.org'
+platform :ios, '13.0'
+
+target 'example-ios' do
+  use_frameworks!
+  pod 'library', :path => '../library'
+end
