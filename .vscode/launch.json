@@ -14,6 +14,18 @@
       "console": "internalConsole",
       "outputCapture": "std",
       // "cwd": "${workspaceFolder}/apps/looky"
+      "cwd": "${workspaceFolder}/rn-lib/example"
+    },
+    {
+      "name": "Example RN",
+      "request": "launch",
+      "runtimeArgs": ["start", "--reset-cache"],
+      "runtimeExecutable": "yarn",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node",
+      "console": "internalConsole",
+      "outputCapture": "std",
+      // "cwd": "${workspaceFolder}/apps/looky"
       "cwd": "${workspaceFolder}/example-rn"
     },
     {
