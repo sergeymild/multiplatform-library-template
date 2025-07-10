@@ -37,10 +37,10 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 //put your multiplatform dependencies here
-                implementation("org.jetbrains.compose.runtime:runtime:1.6.0")
-                implementation("org.jetbrains.compose.foundation:foundation:1.6.0")
-                implementation("org.jetbrains.compose.material3:material3:1.6.0")
-                implementation("org.jetbrains.compose.ui:ui:1.6.0")
+                implementation(compose.ui)
+                implementation(compose.foundation)
+                implementation(compose.material3)
+                implementation(compose.runtime)
             }
         }
         val androidMain by getting {

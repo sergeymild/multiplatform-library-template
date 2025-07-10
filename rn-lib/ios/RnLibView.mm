@@ -6,6 +6,8 @@
 #import <react/renderer/components/RnLibViewSpec/RCTComponentViewHelpers.h>
 
 #import "RCTFabricComponentsPlugins.h"
+#import <library/library.h>
+#import <SwiftUI/SwiftUI.h>
 
 using namespace facebook::react;
 
