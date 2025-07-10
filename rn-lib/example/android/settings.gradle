@@ -5,4 +5,7 @@ rootProject.name = 'rnlib.example'
 include ':app'
 include ':rn-lib'
 project(':rn-lib').projectDir = new File(rootProject.projectDir, '../../android')
+// Подключаем library проект обычным способом
+include ':library'
+project(':library').projectDir = new File(rootProject.projectDir, '../../../library')
 includeBuild('../node_modules/@react-native/gradle-plugin')
