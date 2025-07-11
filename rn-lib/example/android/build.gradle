@@ -15,9 +15,9 @@ buildscript {
         classpath("com.android.tools.build:gradle")
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
-        // Добавляем плагины для Compose Multiplatform в library
-        classpath("org.jetbrains.kotlin:compose-compiler-gradle-plugin:2.2.0")
-        classpath("org.jetbrains.compose:compose-gradle-plugin:1.8.2")
+        // Все плагины для Compose теперь управляются library проектом через version catalog
+        // classpath("org.jetbrains.kotlin:compose-compiler-gradle-plugin:2.2.0")
+        // classpath("org.jetbrains.compose:compose-gradle-plugin:1.8.2")
     }
 }
 

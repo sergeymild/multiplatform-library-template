@@ -13,8 +13,8 @@ buildscript {
     // Обновляем Kotlin до версии 2.2.0 из gradle/libs.versions.toml
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:2.2.0"
     classpath "org.jetbrains.kotlin:compose-compiler-gradle-plugin:2.2.0"
-    // Добавляем плагин Jetbrains Compose для library
-    classpath "org.jetbrains.compose:compose-gradle-plugin:1.8.2"
+    // Убираем плагин Jetbrains Compose - library модуль сам управляет своими зависимостями
+    // classpath "org.jetbrains.compose:compose-gradle-plugin:1.8.2"
   }
 }
 

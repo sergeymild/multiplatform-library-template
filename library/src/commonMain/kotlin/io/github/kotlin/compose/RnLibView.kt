@@ -37,7 +37,7 @@ fun LibraryRnLibView() {
     ) {
       // Заголовок
       Text(
-          text = libraryData.title + ")",
+          text = libraryData.title + ")))",
           fontSize = 24.sp,
           fontWeight = FontWeight.Bold,
           color = Color.Blue,

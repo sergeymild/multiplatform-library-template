@@ -3,5 +3,5 @@ platform :ios, '13.0'
 
 target 'example-ios' do
   use_frameworks!
-  pod 'library', :path => '../library'
+  # library теперь подключается исходниками через project(':library')
 end
