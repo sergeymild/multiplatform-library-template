@@ -1,8 +1,8 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    id("org.jetbrains.compose")
-    id("org.jetbrains.kotlin.plugin.compose")
+    alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.compose.compiler)
 }
 
 group = "io.github.kotlin"
@@ -12,6 +12,10 @@ kotlin {
     androidTarget {
         publishLibraryVariants("release")
     }
+
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
     sourceSets {
         val commonMain by getting {
@@ -32,6 +36,21 @@ kotlin {
                 implementation(compose.preview)
                 implementation(compose.uiTooling)
             }
+        }
+        val iosMain by creating {
+            dependsOn(commonMain)
+            dependencies {
+                // iOS-специфичные зависимости
+            }
+        }
+        val iosX64Main by getting {
+            dependsOn(iosMain)
+        }
+        val iosArm64Main by getting {
+            dependsOn(iosMain)
+        }
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
         }
     }
 }
