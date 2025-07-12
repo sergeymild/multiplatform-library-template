@@ -34,7 +34,7 @@ fun TestView() {
     ) {
         // Header
         Text(
-            text = "Sequenc----2",
+            text = "Sequenc----4",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 8.dp)
