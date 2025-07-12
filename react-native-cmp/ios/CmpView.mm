@@ -6,11 +6,12 @@
 #import <react/renderer/components/CmpViewSpec/RCTComponentViewHelpers.h>
 
 #import "RCTFabricComponentsPlugins.h"
+#import <library/library.h>
 
 using namespace facebook::react;
 
 @interface CmpView () <RCTCmpViewViewProtocol>
-
+@property (nonatomic, strong) UIViewController *composeViewController;
 @end
 
 @implementation CmpView {
@@ -30,6 +31,17 @@ using namespace facebook::react;
 
     _view = [[UIView alloc] init];
 
+    // Create the Compose UI view controller
+    self.composeViewController = [LibraryComposeUIHelperKt createTestViewController];
+
+    // Add the Compose UI view to our view
+    if (self.composeViewController) {
+        UIView *composeView = self.composeViewController.view;
+        [_view addSubview:composeView];
+        composeView.frame = _view.bounds;
+        composeView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    }
+
     self.contentView = _view;
   }
 
@@ -47,6 +59,16 @@ using namespace facebook::react;
     }
 
     [super updateProps:props oldProps:oldProps];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+
+    // Update the Compose view frame when layout changes
+    if (self.composeViewController) {
+        self.composeViewController.view.frame = _view.bounds;
+    }
 }
 
 Class<RCTComponentViewProtocol> CmpViewCls(void)

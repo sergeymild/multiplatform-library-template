@@ -19,6 +19,9 @@ end
 target 'CmpExample' do
   config = use_native_modules!
 
+  # Add dependency on the Kotlin Multiplatform library
+  pod 'library', :path => '../../../library'
+
   use_react_native!(
     :path => config[:reactNativePath],
     # An absolute path to your application root.
