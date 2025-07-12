@@ -10,7 +10,9 @@ import androidx.compose.ui.window.ComposeUIViewController
  * This function creates a UIViewController that contains the TestView Composable.
  * It can be used from Swift code to display the Compose UI.
  */
-fun createTestViewController() = ComposeUIViewController {
+fun createTestViewController() = ComposeUIViewController(configure = {
+    enforceStrictPlistSanityCheck = false
+}) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = Color.Red
