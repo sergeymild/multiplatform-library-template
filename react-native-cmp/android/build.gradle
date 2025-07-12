@@ -6,20 +6,28 @@ buildscript {
   repositories {
     google()
     mavenCentral()
+    maven { url "https://maven.pkg.jetbrains.space/public/p/compose/dev" }
+    gradlePluginPortal()
   }
 
   dependencies {
     classpath "com.android.tools.build:gradle:8.7.2"
     // noinspection DifferentKotlinGradleVersion
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${getExtOrDefault('kotlinVersion')}"
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin-api:${getExtOrDefault('kotlinVersion')}"
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin-model:${getExtOrDefault('kotlinVersion')}"
+    classpath "org.jetbrains.compose:compose-gradle-plugin:1.8.2"
   }
 }
 
 
-apply plugin: "com.android.library"
-apply plugin: "kotlin-android"
-
-apply plugin: "com.facebook.react"
+plugins {
+  id("com.android.library")
+  id("kotlin-android")
+  id("org.jetbrains.compose")
+  id("org.jetbrains.kotlin.plugin.compose")
+  id("com.facebook.react")
+}
 
 def getExtOrIntegerDefault(name) {
   return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties["Cmp_" + name]).toInteger()
@@ -37,6 +45,11 @@ android {
 
   buildFeatures {
     buildConfig true
+    compose true
+  }
+
+  composeOptions {
+    kotlinCompilerExtensionVersion "1.5.8"
   }
 
   buildTypes {
@@ -67,13 +80,38 @@ android {
 repositories {
   mavenCentral()
   google()
+  // Add repository for Jetpack Compose
+  maven { url "https://maven.pkg.jetbrains.space/public/p/compose/dev" }
+  // Add local repository for the Kotlin Multiplatform library
+  flatDir {
+    dirs "${project.projectDir}/libs"
+  }
 }
+
+// Create a task to copy the AAR file from the library module to the libs directory
+task copyLibraryAar(type: Copy) {
+  from "${project.projectDir}/../../library/build/outputs/aar/library-release.aar"
+  into "${project.projectDir}/libs"
+}
+
+// Make sure the copyLibraryAar task runs before the build task
+preBuild.dependsOn copyLibraryAar
 
 def kotlin_version = getExtOrDefault("kotlinVersion")
 
 dependencies {
   implementation "com.facebook.react:react-android"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+  // Use local AAR file dependency
+  implementation files("${project.projectDir}/libs/library-release.aar")
+
+  // Add Jetpack Compose dependencies
+  implementation "androidx.compose.ui:ui:1.8.3"
+  implementation "androidx.compose.foundation:foundation:1.8.3"
+  implementation "androidx.compose.material3:material3:1.3.2"
+  implementation "androidx.activity:activity-compose:1.10.1"
+  implementation "androidx.compose.ui:ui-tooling-preview:1.8.3"
 }
 
 react {

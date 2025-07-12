@@ -32,7 +32,13 @@ class CmpViewManager : SimpleViewManager<CmpView>(),
 
   @ReactProp(name = "color")
   override fun setColor(view: CmpView?, color: String?) {
-    view?.setBackgroundColor(Color.parseColor(color))
+    if (view != null && color != null) {
+      try {
+        view.setBackgroundColor(Color.parseColor(color))
+      } catch (e: IllegalArgumentException) {
+        // Handle invalid color string
+      }
+    }
   }
 
   companion object {

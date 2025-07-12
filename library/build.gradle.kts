@@ -11,7 +11,7 @@ version = "1.0.0"
 
 kotlin {
     androidTarget {
-        publishLibraryVariants("release")
+        publishLibraryVariants("release", "debug")
         compilations.all {
 
         }
@@ -37,18 +37,18 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 //put your multiplatform dependencies here
-                implementation("org.jetbrains.compose.runtime:runtime:1.6.0")
-                implementation("org.jetbrains.compose.foundation:foundation:1.6.0")
-                implementation("org.jetbrains.compose.material3:material3:1.6.0")
-                implementation("org.jetbrains.compose.ui:ui:1.6.0")
+                implementation("org.jetbrains.compose.runtime:runtime:1.8.2")
+                implementation("org.jetbrains.compose.foundation:foundation:1.8.2")
+                implementation("org.jetbrains.compose.material3:material3:1.8.2")
+                implementation("org.jetbrains.compose.ui:ui:1.8.2")
             }
         }
         val androidMain by getting {
             dependencies {
-                implementation(libs.compose.ui)
-                implementation(libs.compose.ui.tooling.preview)
-                implementation(libs.compose.foundation)
-                implementation(libs.compose.material3)
+                implementation("androidx.compose.ui:ui:1.8.3")
+                implementation("androidx.compose.ui:ui-tooling-preview:1.8.3")
+                implementation("androidx.compose.foundation:foundation:1.8.3")
+                implementation("androidx.compose.material3:material3:1.3.2")
             }
         }
     }
@@ -56,12 +56,18 @@ kotlin {
 
 android {
     namespace = "org.jetbrains.kotlinx.multiplatform.library.template"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    compileSdk = 36
     defaultConfig {
-        minSdk = libs.versions.android.minSdk.get().toInt()
+        minSdk = 24
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.8"
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 }

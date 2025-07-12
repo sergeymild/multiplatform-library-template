@@ -10,12 +10,20 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven { url "https://maven.pkg.jetbrains.space/public/p/compose/dev" }
+        gradlePluginPortal()
     }
     dependencies {
         classpath("com.android.tools.build:gradle")
         classpath("com.facebook.react:react-native-gradle-plugin")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin-api:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin-model:${kotlinVersion}")
+        classpath("org.jetbrains.compose:compose-gradle-plugin:1.8.2")
+        // Add the Compose compiler plugin
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
     }
 }
+
 
 apply plugin: "com.facebook.react.rootproject"
